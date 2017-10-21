@@ -14,7 +14,7 @@ int	ft_validtets(char *buf)
 	while(buf[x] != '\0')
 	{
 		if (v % 5 == 4 && buf[x] != '\n')
-			return (0);
+			ft_error();
 		if(buf[x] == '\n')
 		{
 			if ((((v % 5) != 4) && (v % 20) != 0))
@@ -34,8 +34,8 @@ int	ft_validtets(char *buf)
 		x++;
 		v++;
 	}
-	if (buf[x -2] == '\n')
-		return (0);
+	if (buf[x - 2] == '\n')
+		ft_error();
 	return (y - 1);
 }
 
@@ -54,7 +54,7 @@ char	**ft_tetsplit(char *buf, int tetcount)
 		ret[y++] = (char*)malloc(sizeof(char) * 21);
 	y = 0;
 	tetcount = 20;
-	while(buf[++i] != '\0')
+	while (buf[++i] != '\0')
 	{
 		if (i != tetcount)
 			ret[y][x++] = buf[i];
@@ -67,7 +67,6 @@ char	**ft_tetsplit(char *buf, int tetcount)
 	}
 	return (ret);
 }
-
 
 int main (int argc, char **argv)
 {

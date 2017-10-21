@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/10 20:02:00 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/10/20 22:25:15 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/20 20:26:06 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		ft_hashcount(char *onetet)
 	}
 	if (hcount == 4)
 		return (1);
+	ft_error();
 	return (-1);
 }
 
@@ -69,8 +70,7 @@ int		findfirsthash(char *tetristr)
 	int i;
 
 	i = 0;
-	if (ft_hashcount(tetristr) == -1)
-		ft_error();
+	ft_hashcount(tetristr);
 	while (tetristr[i] != '\0')
 	{
 		if (tetristr[i] == '#')
@@ -87,6 +87,8 @@ int     **determinefigures(char **tetristr, int tetcount)
 	int hash;
 
 	y = 0;
+//	if (tetcount == 1)
+//		ft_onetet();//hardcoding for 1 tet
     tetconf = (int **)malloc(sizeof(int*) * tetcount);
     mallocintarray(tetconf, tetcount);
     while (y < tetcount)
