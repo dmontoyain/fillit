@@ -13,8 +13,6 @@ int	ft_validtets(char *buf)
 	v = 0;
 	while(buf[x] != '\0')
 	{
-		if (v % 5 == 4 && buf[x] != '\n')
-			return (0);
 		if(buf[x] == '\n')
 		{
 			if ((((v % 5) != 4) && (v % 20) != 0))

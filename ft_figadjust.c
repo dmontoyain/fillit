@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/17 17:53:54 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/10/20 20:37:24 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/20 21:14:05 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		**ft_figadjust(int **fig, int size, int tetcount)
 	int y;
 
 	y = 0;
-	if (tetcount == 2 && size == 3)
+	if (tetcount <= 2 && size == 3)
 		fig = two_tets(fig, tetcount);
 	else
 	{
