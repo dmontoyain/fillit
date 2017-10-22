@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 22:52:55 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/10/20 21:34:50 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/21 17:16:17 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ int		fillit(char *grid, int *tetconf, int i, int y)
 	return (1);
 }
 
+int		finished_recursion(int y, char *grid, int tetcount)
+{
+	if (tetcount == y + 1)
+	{
+		if (tetcount - 1 == 0)
+			ft_putstr(grid);
+		return (1);
+	}
+	return (-1);
+}
+
 int		recursive_backtrack(char *grid, int **tetconf, int y, int tetcount)
 {
 	int	x;
@@ -57,12 +68,8 @@ int		recursive_backtrack(char *grid, int **tetconf, int y, int tetcount)
 			fillit(grid, tetconf[y], x, y);
 			if (y + 1 != tetcount)
 				tetcount = recursive_backtrack(grid, tetconf, y + 1, tetcount);
-			if (tetcount == y + 1)
-			{
-				if (tetcount - 1 == 0)
-					ft_putstr(grid);
+			if (finished_recursion(y, grid, tetcount) == 1)
 				return (--tetcount);
-			}
 		}
 		else if (grid[x + 1] == '\0' && y == 0)
 		{
@@ -75,14 +82,6 @@ int		recursive_backtrack(char *grid, int **tetconf, int y, int tetcount)
 	return (tetcount);
 }
 
-void	ft_onetet(int *tetconf)
-{
-	int x;
-
-	x = 2;
-	tetconf[x++] = 3;
-	tetconf[x] = 4;
-}
 void	findbesttetris(int **tetconf, int tetcount)
 {
 	int		size;
@@ -90,12 +89,9 @@ void	findbesttetris(int **tetconf, int tetcount)
 	int		y;
 
 	y = 0;
-	if (tetcount == 1 && tetconf[0][1] == 1 && tetconf[0][2] == 5 && tetconf[0][3] == 6)
-	{
-		ft_onetet(tetconf[0]);
-		grid = squaresize(2);
-		tetcount = recursive_backtrack(grid, tetconf, y, tetcount);
-	}
+	if (tetcount == 1 && tetconf[0][1] == 1 && tetconf[0][2] == 5
+		&& tetconf[0][3] == 6)
+		tetcount = ft_onetet(tetconf, tetcount);
 	size = 3;
 	if (tetcount <= 2 && tetcount > 0 && size == 3)
 	{

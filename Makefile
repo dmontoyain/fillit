@@ -6,7 +6,7 @@
 #    By: dglaser <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 14:24:42 by dglaser           #+#    #+#              #
-#    Updated: 2017/10/20 01:43:07 by dmontoya         ###   ########.fr        #
+#    Updated: 2017/10/21 17:15:19 by dmontoya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC =	ft_putchar.c \
 	  	main.c \
 		ft_figadjust.c \
 		utilities.c \
-		ft_twotets.c
+		ft_twotets.c \
+		ft_onetet.c
 
 OBJ = $(SRC:.c=.o)
 
