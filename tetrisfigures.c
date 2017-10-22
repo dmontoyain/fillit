@@ -6,7 +6,7 @@
 /*   By: dmontoya <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/10 20:02:00 by dmontoya          #+#    #+#             */
-/*   Updated: 2017/10/21 16:41:37 by dmontoya         ###   ########.fr       */
+/*   Updated: 2017/10/21 17:26:01 by dmontoya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		ft_checkvalidtet(int *tc)
 		((tc[1] == 1) && (tc[2] == 4) && (tc[3] == 5)) ||
 		((tc[1] == 4) && (tc[2] == 5) && (tc[3] == 9)))
 		return (1);
-	if ((tetconfig[1] == 3) && (tetconfig[2] == 4) && (tetconfig[3] == 5))
+	if ((tc[1] == 3) && (tc[2] == 4) && (tc[3] == 5))
 		return (2);
 	ft_error();
 	return (-1);
