@@ -1,25 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dglaser <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/22 19:01:35 by dglaser           #+#    #+#             */
+/*   Updated: 2017/10/26 17:19:18 by dmontoya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
 #define BUF_SIZE 1000
 
-int	ft_validtets(char *buf)
+void		ft_checktet(int x, char *b)
 {
-	int x;
-	int y;
-	int v;
+	int i;
 
-	x = 0;
-	y = 1;
-	v = 0;
-	while(buf[x] != '\0')
+	i = 0;
+	if (b[x - 2] == '\n')
+		ft_error();
+	while (i < x)
 	{
-		if (v % 5 == 4 && buf[x] != '\n')
+		if (b[i] == '.' || b[i] == '#' || b[i] == '\n' || b[i] == '\0')
+			i++;
+		else
 			ft_error();
-		if(buf[x] == '\n')
+	}
+}
+
+int			ft_validtets(char *buf, int x, int y, int v)
+{
+	while (buf[x] != '\0')
+	{
+		if (buf[x] == '\n')
 		{
 			if ((((v % 5) != 4) && (v % 20) != 0))
 				return (0);
-			if((v % 5) == 4)
+			if ((v % 5) == 4)
 			{
 				x++;
 				v++;
@@ -33,13 +51,14 @@ int	ft_validtets(char *buf)
 		}
 		x++;
 		v++;
+		if ((v % 5 == 4) && (buf[x] != '\n'))
+			return (0);
 	}
-	if (buf[x - 2] == '\n')
-		ft_error();
+	ft_checktet(x, buf);
 	return (y - 1);
 }
 
-char	**ft_tetsplit(char *buf, int tetcount)
+char		**ft_tetsplit(char *buf, int tetcount)
 {
 	int		x;
 	int		y;
@@ -68,36 +87,25 @@ char	**ft_tetsplit(char *buf, int tetcount)
 	return (ret);
 }
 
-int main (int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	int fd;
-	int ret;
-	char buf[BUF_SIZE + 1];
-	char *str;
-	int tets;
-	char **tetstrings;
+	int		fd;
+	char	buf[BUF_SIZE + 1];
+	int		tets;
+	char	**tetstrings;
 	int		**tetconf;
 
-	str = NULL;
-	if (argc == 2)
-		str = argv[1]; //this takes a file name or path from stdini
-	fd = open(str, O_RDONLY); //reads the file and returns the size
+	if (argc != 2)
+		ft_error();
+	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putstr("error");
-		return (1);
-	}
-	ret = read(fd, buf, BUF_SIZE); //read returns the size of buf;
-	tets = ft_validtets(buf);
+		ft_error();
+	read(fd, buf, BUF_SIZE);
+	tets = ft_validtets(buf, 0, 1, 0);
 	if (tets == 0)
-		ft_putstr("error");
+		ft_error();
 	tetstrings = ft_tetsplit(buf, tets);
 	tetconf = determinefigures(tetstrings, tets);
 	findbesttetris(tetconf, tets);
-	if(fd == - 1)
-	{
-		ft_putstr("close() error");
-		return (1);
-	}
 	return (0);
 }

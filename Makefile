@@ -6,13 +6,11 @@
 #    By: dglaser <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/05 14:24:42 by dglaser           #+#    #+#              #
-#    Updated: 2017/10/21 17:15:19 by dmontoya         ###   ########.fr        #
+#    Updated: 2017/10/23 14:43:39 by dmontoya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-
-PROGRAMNAME = fillit
+NAME = fillit
 
 SRC =	ft_putchar.c \
 	  	ft_putstr.c \
@@ -25,19 +23,18 @@ SRC =	ft_putchar.c \
 	  	main.c \
 		ft_figadjust.c \
 		utilities.c \
-		ft_twotets.c \
-		ft_onetet.c
+		ft_twotets.c
 
-OBJ = $(SRC:.c=.o)
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME):
-	gcc -Werror -Wall -Wextra -c $(SRC) -g
-	gcc $(SRC) -o $(PROGRAMNAME)
+	gcc $(FLAGS) -c $(SRC)
+	gcc $(FLAGS) *.c -o $(NAME)
+
 clean:
 	/bin/rm -f *.o
-	rm *~
 
 fclean: clean
 	/bin/rm -f $(NAME)
